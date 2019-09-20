@@ -5,6 +5,7 @@ function Snake() {
 	this.yspeed = 0;
 	this.total = 0;
 	this.tail = [];
+	this.dead = false;
 
 	this.eat = function(pos) {
 		var d = dist(this.x, this.y, pos.x, pos.y);
@@ -26,13 +27,16 @@ function Snake() {
 			var pos = this.tail[i];
 			var d = dist(this.x, this.y, pos.x, pos.y);
 			if(d < 1) {
+				this.dead = true;
 				this.total = 0;
 				this.tail = [];
+				
 			}
 		}
 	}
 
 	this.update = function() {
+
 		if(this.total === this.tail.length) {
 			for (var i = 0; i < this.tail.length-1; i++) {
 			this.tail[i] = this.tail[i+1];
@@ -54,5 +58,7 @@ function Snake() {
 		}
 
 		rect(this.x, this.y, scl, scl);
+
+		//txt = createDiv("Points: ");
 	}
 }
